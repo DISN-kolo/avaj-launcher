@@ -4,10 +4,12 @@ import	java.io.File;
 import	java.io.FileNotFoundException;
 import	java.util.Scanner;
 import	java.lang.Exception;
+import	java.util.List;
 
 public class Simulator {
-	private static int		stepsAmt = 0;
-	private static Scanner	sc = null;
+	private static int			stepsAmt = 0;
+	private static Scanner		sc = null;
+	private static List<String>	aircraftTypes = List.<String>of("JetPlane", "Helicopter", "Balloon");
 
 	private static void	firstLineHandling() throws Exception {
 		if (Simulator.sc.hasNextInt()) {
@@ -25,14 +27,22 @@ public class Simulator {
 		}
 	}
 
-	private static void	normalLineHandling(String line) {
+	private static void	normalLineHandling(String line) throws Exception {
 		Scanner	lineSc = new Scanner(line);
 		String	localToken;
 		int		counter = 0;
-		while (lineSc.hasNext()) {
+		while (lineSc.hasNext() && counter < 6) {
 			localToken = lineSc.next();
 			System.out.println(counter + ": " + localToken);
+			if (counter == 0) {
+				if (!(Simulator.aircraftTypes.contains(localToken))) {
+					throw new Exception("Aircraft type '" + localToken + "' is incorrect");
+				}
+			}
 			counter++;
+		}
+		if (counter != 5) {
+			throw new Exception("Line '" + line + "' doesn't have exactly five elements");
 		}
 	}
 
