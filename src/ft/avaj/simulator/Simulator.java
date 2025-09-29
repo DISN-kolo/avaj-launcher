@@ -31,18 +31,42 @@ public class Simulator {
 		Scanner	lineSc = new Scanner(line);
 		String	localToken;
 		int		counter = 0;
-		while (lineSc.hasNext() && counter < 6) {
+		String	acType;
+		String	acName;
+		int		longitude = 0;
+		int		latitude = 0;
+		int		height = 0;
+		while (lineSc.hasNext()) {
 			localToken = lineSc.next();
-			System.out.println(counter + ": " + localToken);
-			if (counter == 0) {
-				if (!(Simulator.aircraftTypes.contains(localToken))) {
-					throw new Exception("Aircraft type '" + localToken + "' is incorrect");
-				}
+			switch (counter) {
+				case 0:
+					if (!(Simulator.aircraftTypes.contains(localToken))) {
+						throw new Exception("Aircraft type '" + localToken + "' is incorrect");
+					}
+					acType = localToken;
+					System.out.println("Type: " + acType);
+					break ;
+				case 1:
+					acName = localToken;
+					System.out.println("Name: " + acName);
+					break ;
+				case 2:
+					longitude = Integer.valueOf(localToken);
+					System.out.println("Lon:  " + longitude);
+					break ;
+				case 3:
+					latitude = Integer.valueOf(localToken);
+					System.out.println("Lat:  " + latitude);
+					break ;
+				case 4:
+					height = Integer.valueOf(localToken);
+					System.out.println("Hei:  " + height);
+					break ;
+				default:
+					System.err.println("Too many elements. Throwing");
+					throw new Exception("Line '" + line + "' doesn't have exactly five elements");
 			}
 			counter++;
-		}
-		if (counter != 5) {
-			throw new Exception("Line '" + line + "' doesn't have exactly five elements");
 		}
 	}
 
