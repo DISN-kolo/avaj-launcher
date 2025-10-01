@@ -6,10 +6,16 @@ import	java.util.Scanner;
 import	java.lang.Exception;
 import	java.util.List;
 
+import ft.avaj.simulator.weatherProvider.*;
+import ft.avaj.simulator.flyable.*;
+import ft.avaj.simulator.flyable.aircraft.*;
+
 public class Simulator {
-	private static int			stepsAmt = 0;
-	private static Scanner		sc = null;
-	private static List<String>	aircraftTypes = List.<String>of("JetPlane", "Helicopter", "Balloon");
+	private static int				stepsAmt = 0;
+	private static Scanner			sc = null;
+	private static List<String>		aircraftTypes = List.<String>of("JetPlane", "Helicopter", "Balloon");
+	private static WeatherTower		weatherTower = new WeatherTower();
+	private static AircraftFactory	aircraftFactory = new AircraftFactory();
 
 	private static void	firstLineHandling() throws Exception {
 		if (Simulator.sc.hasNextInt()) {
@@ -68,6 +74,7 @@ public class Simulator {
 			}
 			counter++;
 		}
+		
 	}
 
 	public static void	main(String[] args) {
@@ -92,6 +99,8 @@ public class Simulator {
 				System.out.println(currentLine);
 				Simulator.normalLineHandling(currentLine);
 			}
+
+			weatherTower
 		}
 		catch (Exception e) {
 			e.printStackTrace();

@@ -7,7 +7,7 @@ import ft.avaj.simulator.flyable.aircraft.Balloon;
 
 public class	AircraftFactory {
 	private long	id = 0;
-	public FLyable* newAircraft(String p_type, String p_name, Coordinates p_coordinates) {
+	public Flyable* newAircraft(String p_type, String p_name, Coordinates p_coordinates) {
 		switch (p_type) {
 			case "Helicopter":
 				return new Helicopter(this.id++, p_name, p_coordinates);
